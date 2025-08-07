@@ -15,9 +15,10 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-// import Password from "@/components/ui/Password";
-// import { useRegisterMutation } from "@/redux/features/auth/auth.api";
-// import { toast } from "sonner";
+import Password from "@/components/ui/Password";
+import { useRegisterMutation } from "@/redux/features/auth/auth.api";
+import { toast } from "sonner";
+
 
 const registerSchema = z
     .object({
@@ -42,7 +43,7 @@ export function RegisterForm({
     className,
     ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
-    //   const [register] = useRegisterMutation();
+    const [register] = useRegisterMutation();
     // const navigate = useNavigate();
 
     const form = useForm<z.infer<typeof registerSchema>>({
@@ -55,22 +56,22 @@ export function RegisterForm({
         },
     });
 
-    //   const onSubmit = async (data: z.infer<typeof registerSchema>) => {
-    //     const userInfo = {
-    //       name: data.name,
-    //       email: data.email,
-    //       password: data.password,
-    //     };
+    const onSubmit = async (data: z.infer<typeof registerSchema>) => {
+        const userInfo = {
+            name: data.name,
+            email: data.email,
+            password: data.password,
+        };
 
-    //     try {
-    //       const result = await register(userInfo).unwrap();
-    //       console.log(result);
-    //     //   toast.success("User created successfully");
-    //       navigate("/verify");
-    //     } catch (error) {
-    //       console.error(error);
-    //     }
-    //   };
+        try {
+            const result = await register(userInfo).unwrap();
+            console.log(result);
+            toast.success("User created successfully");
+            // navigate("/verify");
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     return (
         <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -83,8 +84,7 @@ export function RegisterForm({
 
             <div className="grid gap-6">
                 <Form {...form}>
-                    {/* <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6"> */}
-                    <form className="space-y-6">
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                         <FormField
                             control={form.control}
                             name="name"
@@ -121,39 +121,39 @@ export function RegisterForm({
                                 </FormItem>
                             )}
                         />
-                        {/* <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Password {...field} />
-                  </FormControl>
-                  <FormDescription className="sr-only">
-                    This is your public display name.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            /> */}
+                        <FormField
+                            control={form.control}
+                            name="password"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Password</FormLabel>
+                                    <FormControl>
+                                        <Password {...field} />
+                                    </FormControl>
+                                    <FormDescription className="sr-only">
+                                        This is your public display name.
+                                    </FormDescription>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
 
-                        {/* <FormField
-              control={form.control}
-              name="confirmPassword"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Confirm Password</FormLabel>
-                  <FormControl>
-                    <Password {...field} />
-                  </FormControl>
-                  <FormDescription className="sr-only">
-                    This is your public display name.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            /> */}
+                        <FormField
+                            control={form.control}
+                            name="confirmPassword"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Confirm Password</FormLabel>
+                                    <FormControl>
+                                        <Password {...field} />
+                                    </FormControl>
+                                    <FormDescription className="sr-only">
+                                        This is your public display name.
+                                    </FormDescription>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
                         <Button type="submit" className="w-full">
                             Submit
                         </Button>
