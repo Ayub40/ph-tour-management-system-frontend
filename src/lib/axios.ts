@@ -3,7 +3,9 @@ import axios from "axios";
 
 export const axiosInstance = axios.create({
     // baseURL: "http://localhost:5000/api/v1",
-    baseURL:config.baseUrl
+    baseURL: config.baseUrl,
+    // for Cookie
+    withCredentials: true
 });
 
 // Add a request interceptor
