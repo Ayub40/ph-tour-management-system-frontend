@@ -30,6 +30,7 @@ export function AddTourTypeModal() {
         if (res.success) {
             toast.success("Tour Type Added");
         }
+        // console.log(data);
     };
 
     return (

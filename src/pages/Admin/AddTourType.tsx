@@ -13,6 +13,7 @@ import { Trash2 } from "lucide-react";
 
 export default function AddTourType() {
   const { data } = useGetTourTypesQuery(undefined);
+  console.log(data);
 
   return (
     <div className="w-full max-w-7xl mx-auto px-5">
@@ -29,7 +30,8 @@ export default function AddTourType() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data?.data?.map((item: { name: string }) => (
+            {/* {data?.data?.map((item: { name: string }) => ( */}
+            {data?.map((item: { _id: string; name: string }) => (
               <TableRow>
                 <TableCell className="font-medium w-full">
                   {item?.name}
@@ -47,11 +49,6 @@ export default function AddTourType() {
     </div>
   );
 }
-
-
-
-
-
 
 
 

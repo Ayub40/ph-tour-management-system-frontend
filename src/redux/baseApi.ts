@@ -8,7 +8,9 @@ export const baseApi = createApi({
     //     baseUrl: config.baseUrl,
     //     credentials: "include",
     //   }),
-    tagTypes: ["USER"],
+
+    // eta ( tagTypes ) dile reload na diai data cole asbe
+    tagTypes: ["USER", "TOUR"],
     endpoints: () => ({}),
 });
 
