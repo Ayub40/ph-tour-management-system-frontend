@@ -1,0 +1,2 @@
+1. withAuth ==> eta admin,user ra jeno ekjon r ekjon er route dekhte na pare
+2. 
