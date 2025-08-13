@@ -37,8 +37,7 @@ export default function AddTourType() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {/* {data?.data?.map((item: { name: string }) => ( */}
-            {data?.map((item: { _id: string; name: string }) => (
+            {data?.data?.map((item: { name: string }) => (
               <TableRow>
                 <TableCell className="font-medium w-full">
                   {item?.name}
@@ -51,26 +50,6 @@ export default function AddTourType() {
               </TableRow>
             ))}
           </TableBody>
-
-          {/* Pagination Buttons */}
-          {/* <div className="flex gap-2 justify-center my-4">
-            <Button
-              disabled={page === 1}
-              onClick={() => setPage((prev) => prev - 1)}
-            >
-              Prev
-            </Button>
-            <span>
-              Page {page} of {data?.meta?.totalPage}
-            </span>
-            <Button
-              disabled={page === data?.meta?.totalPage}
-              onClick={() => setPage((prev) => prev + 1)}
-            >
-              Next
-            </Button>
-          </div> */}
-          {/* Pagination End */}
         </Table>
       </div>
     </div>
