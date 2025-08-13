@@ -70,7 +70,7 @@ export function AddTourTypeModal() {
                             <Button variant="outline">Cancel</Button>
                         </DialogClose>
                         <Button type="submit" form="add-tour-type">
-                            Save changes
+                            Create Tour
                         </Button>
                     </DialogFooter>
                 </DialogContent>

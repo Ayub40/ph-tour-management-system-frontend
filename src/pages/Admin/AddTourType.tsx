@@ -10,10 +10,17 @@ import {
 } from "@/components/ui/table";
 import { useGetTourTypesQuery } from "@/redux/features/Tour/tour.api";
 import { Trash2 } from "lucide-react";
+// import { useState } from "react";
 
 export default function AddTourType() {
   const { data } = useGetTourTypesQuery(undefined);
   console.log(data);
+
+  // for pagination
+  // const [page, setPage] = useState(1);
+  // const limit = 5;
+  // const { data, isLoading } = useGetTourTypesQuery({ page, limit });
+  // ===========================
 
   return (
     <div className="w-full max-w-7xl mx-auto px-5">
@@ -44,6 +51,26 @@ export default function AddTourType() {
               </TableRow>
             ))}
           </TableBody>
+
+          {/* Pagination Buttons */}
+          {/* <div className="flex gap-2 justify-center my-4">
+            <Button
+              disabled={page === 1}
+              onClick={() => setPage((prev) => prev - 1)}
+            >
+              Prev
+            </Button>
+            <span>
+              Page {page} of {data?.meta?.totalPage}
+            </span>
+            <Button
+              disabled={page === data?.meta?.totalPage}
+              onClick={() => setPage((prev) => prev + 1)}
+            >
+              Next
+            </Button>
+          </div> */}
+          {/* Pagination End */}
         </Table>
       </div>
     </div>
