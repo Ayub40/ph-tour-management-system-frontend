@@ -10,7 +10,7 @@ export const baseApi = createApi({
     //   }),
 
     // eta ( tagTypes ) dile reload na diai data cole asbe
-    tagTypes: ["USER", "TOUR"],
+    tagTypes: ["USER", "TOUR", "DIVISION"],
     endpoints: () => ({}),
 });
 
