@@ -38,7 +38,8 @@ export default function AddDivision() {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {data?.data?.map((item: { _id: string; name: string }) => (
+                        {/* {data?.data?.map((item: { _id: string; name: string }) => ( */}
+                        {data?.map((item: { _id: string; name: string }) => (
                             <TableRow>
                                 <TableCell className="font-medium w-full">
                                     {item?.name}
