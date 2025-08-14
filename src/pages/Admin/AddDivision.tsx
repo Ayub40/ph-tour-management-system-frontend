@@ -1,33 +1,35 @@
-// import { DeleteConfirmation } from "@/components/DeleteConfirmation";
+import { DeleteConfirmation } from "@/components/DeleteConfirmation";
 import { AddDivisionModal } from "@/components/modules/Admin/Division/AddDivisionModal";
-// import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { useGetDivisionsQuery } from "@/redux/features/division/division.api";
-// import { Trash2 } from "lucide-react";
+import { useGetDivisionsQuery, useRemoveDivisionMutation } from "@/redux/features/division/division.api";
+import { Trash2 } from "lucide-react";
+import { toast } from "sonner";
 
 export default function AddDivision() {
     const { data } = useGetDivisionsQuery(undefined);
     console.log(data);
+    const [removeDivision] = useRemoveDivisionMutation();
 
-    // const handleRemoveTourType = async (tourId: string) => {
-    //     const toastId = toast.loading("Removing...");
-    //     try {
-    //         const res = await removeTourType(tourId).unwrap();
+    const handleRemoveDivision = async (divisionId: string) => {
+        const toastId = toast.loading("Removing...");
+        try {
+            const res = await removeDivision(divisionId).unwrap();
 
-    //         if (res.success) {
-    //             toast.success("Removed", { id: toastId });
-    //         }
-    //     } catch (err) {
-    //         console.error(err);
-    //     }
-    // };
+            if (res.success) {
+                toast.success("Removed", { id: toastId });
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
 
     return (
         <div>
-            <h1>This is AddDivision Component</h1>
+            <h1 className="mb-1.5">This is AddDivision Component</h1>
             <AddDivisionModal />
-            <div className="border border-muted rounded-md">
+            <div className="border border-muted rounded-md mt-3">
                 <Table>
                     <TableHeader>
                         <TableRow>
@@ -42,13 +44,13 @@ export default function AddDivision() {
                                     {item?.name}
                                 </TableCell>
                                 <TableCell>
-                                    {/* <DeleteConfirmation
-                                        onConfirm={() => handleRemoveTourType(item._id)}
+                                    <DeleteConfirmation
+                                        onConfirm={() => handleRemoveDivision(item._id)}
                                     >
                                         <Button size="sm">
                                             <Trash2 />
                                         </Button>
-                                    </DeleteConfirmation> */}
+                                    </DeleteConfirmation>
                                 </TableCell>
                             </TableRow>
                         ))}
