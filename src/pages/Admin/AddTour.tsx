@@ -1,4 +1,4 @@
-// import MultipleImageUploader from "@/components/MultipleImageUploader";
+import MultipleImageUploader from "@/components/MultipleImageUploader";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -32,22 +32,22 @@ import {
 } from "@/components/ui/select";
 
 import { Textarea } from "@/components/ui/textarea";
+import type { FileMetadata } from "@/hooks/use-file-upload";
 // import type { FileMetadata } from "@/hooks/use-file-upload";
 import { cn } from "@/lib/utils";
 import { useGetDivisionsQuery } from "@/redux/features/division/division.api";
 import {
-    // useAddTourMutation,
+    useAddTourMutation,
     useGetTourTypesQuery,
 } from "@/redux/features/Tour/tour.api";
-// import type { IErrorResponse } from "@/types";
+import type { IErrorResponse } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-// import { format, formatISO } from "date-fns";
-import { format } from "date-fns";
+import { format, formatISO } from "date-fns";
 import { CalendarIcon, Plus, Trash2 } from "lucide-react";
-// import { useState } from "react";
-
+import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
-// import { toast } from "sonner";
+import { toast } from "sonner";
+
 import z from "zod";
 
 const formSchema = z.object({
@@ -70,12 +70,13 @@ const formSchema = z.object({
 });
 
 export default function AddTour() {
-    // const [images, setImages] = useState<(File | FileMetadata)[] | []>([]);
+    const [images, setImages] = useState<(File | FileMetadata)[] | []>([]);
+    // console.log(images);
 
     const { data: divisionData, isLoading: divisionLoading } =
         useGetDivisionsQuery(undefined);
     const { data: tourTypeData } = useGetTourTypesQuery(undefined);
-    // const [addTour] = useAddTourMutation();
+    const [addTour] = useAddTourMutation();
 
     const divisionOptions = divisionData?.map(
         (item: { _id: string; name: string }) => ({
@@ -170,60 +171,60 @@ export default function AddTour() {
         name: "tourPlan",
     });
 
-    // const handleSubmit = async (data: z.infer<typeof formSchema>) => {
-    //     const toastId = toast.loading("Creating tour....");
+    const handleSubmit = async (data: z.infer<typeof formSchema>) => {
+        const toastId = toast.loading("Creating tour....");
 
-    //     if (images.length === 0) {
-    //         toast.error("Please add some images", { id: toastId });
-    //         return;
-    //     }
+        if (images.length === 0) {
+            toast.error("Please add some images", { id: toastId });
+            return;
+        }
 
-    //     const tourData = {
-    //         ...data,
-    //         costFrom: Number(data.costFrom),
-    //         minAge: Number(data.minAge),
-    //         maxGuest: Number(data.maxGuest),
-    //         startDate: formatISO(data.startDate),
-    //         endDate: formatISO(data.endDate),
-    //         included:
-    //             data.included[0].value === ""
-    //                 ? []
-    //                 : data.included.map((item: { value: string }) => item.value),
-    //         excluded:
-    //             data.included[0].value === ""
-    //                 ? []
-    //                 : data.excluded.map((item: { value: string }) => item.value),
-    //         amenities:
-    //             data.amenities[0].value === ""
-    //                 ? []
-    //                 : data.amenities.map((item: { value: string }) => item.value),
-    //         tourPlan:
-    //             data.tourPlan[0].value === ""
-    //                 ? []
-    //                 : data.tourPlan.map((item: { value: string }) => item.value),
-    //     };
+        const tourData = {
+            ...data,
+            costFrom: Number(data.costFrom),
+            minAge: Number(data.minAge),
+            maxGuest: Number(data.maxGuest),
+            startDate: formatISO(data.startDate),
+            endDate: formatISO(data.endDate),
+            included:
+                data.included[0].value === ""
+                    ? []
+                    : data.included.map((item: { value: string }) => item.value),
+            excluded:
+                data.included[0].value === ""
+                    ? []
+                    : data.excluded.map((item: { value: string }) => item.value),
+            amenities:
+                data.amenities[0].value === ""
+                    ? []
+                    : data.amenities.map((item: { value: string }) => item.value),
+            tourPlan:
+                data.tourPlan[0].value === ""
+                    ? []
+                    : data.tourPlan.map((item: { value: string }) => item.value),
+        };
 
-    //     const formData = new FormData();
+        const formData = new FormData();
 
-    //     formData.append("data", JSON.stringify(tourData));
-    //     images.forEach((image) => formData.append("files", image as File));
+        formData.append("data", JSON.stringify(tourData));
+        images.forEach((image) => formData.append("files", image as File));
 
-    //     try {
-    //         const res = await addTour(formData).unwrap();
+        try {
+            const res = await addTour(formData).unwrap();
 
-    //         if (res.success) {
-    //             toast.success("Tour created", { id: toastId });
-    //             form.reset();
-    //         } else {
-    //             toast.error("Something went wrong", { id: toastId });
-    //         }
-    //     } catch (err: unknown) {
-    //         console.error(err);
-    //         toast.error((err as IErrorResponse).message || "Something went wrong", {
-    //             id: toastId,
-    //         });
-    //     }
-    // };
+            if (res.success) {
+                toast.success("Tour created", { id: toastId });
+                form.reset();
+            } else {
+                toast.error("Something went wrong", { id: toastId });
+            }
+        } catch (err: unknown) {
+            console.error(err);
+            toast.error((err as IErrorResponse).message || "Something went wrong", {
+                id: toastId,
+            });
+        }
+    };
 
     return (
         <div className="w-full max-w-4xl mx-auto px-5 mt-16">
@@ -237,7 +238,7 @@ export default function AddTour() {
                         <form
                             id="add-tour-form"
                             className="space-y-5"
-                        // onSubmit={form.handleSubmit(handleSubmit)}
+                            onSubmit={form.handleSubmit(handleSubmit)}
                         >
                             <FormField
                                 control={form.control}
@@ -506,9 +507,9 @@ export default function AddTour() {
                                         </FormItem>
                                     )}
                                 />
-                                {/* <div className="flex-1 mt-5">
+                                <div className="flex-1 mt-5">
                                     <MultipleImageUploader onChange={setImages} />
-                                </div> */}
+                                </div>
                             </div>
                             <div className="border-t border-muted w-full "></div>
                             <div>
