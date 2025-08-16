@@ -15,12 +15,17 @@ import { withAuth } from "@/utils/withAuth";
 import Tours from "@/pages/Tours";
 import TourDetails from "@/pages/TourDetails";
 import Booking from "@/pages/Booking";
+import Homepage from "@/pages/Homepage";
 
 export const router = createBrowserRouter([
   {
     Component: App,
     path: "/",
     children: [
+      {
+        Component: Homepage,
+        index: true,
+      },
       {
         Component: withAuth(About),
         // Component: About,
