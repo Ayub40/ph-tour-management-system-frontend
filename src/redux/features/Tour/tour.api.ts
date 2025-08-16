@@ -43,13 +43,13 @@ export const tourApi = baseApi.injectEndpoints({
         }),
 
         getAllTours: builder.query<ITourPackage[], unknown>({
-            // query: (params) => ({
-            query: () => ({
+            query: (params) => ({
                 url: "/tour",
                 method: "GET",
-                // params: params,
+                params: params,
             }),
             providesTags: ["TOUR"],
+            // Only data dekha jabe ( response.data )
             transformResponse: (response: IResponse<ITourPackage[]>) => response.data,
         }),
     }),
