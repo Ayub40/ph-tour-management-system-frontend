@@ -204,6 +204,8 @@ export default function AddTour() {
                     : data.tourPlan.map((item: { value: string }) => item.value),
         };
 
+        // console.log(tourData);
+
         const formData = new FormData();
 
         formData.append("data", JSON.stringify(tourData));
