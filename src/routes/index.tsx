@@ -27,9 +27,21 @@ export const router = createBrowserRouter([
         index: true,
       },
       {
-        Component: withAuth(About),
-        // Component: About,
+        // Component: withAuth(About),
+        Component: About,
         path: "about",
+      },
+      {
+        Component: Tours,
+        path: "tours",
+      },
+      {
+        Component: TourDetails,
+        path: "tours/:id",
+      },
+      {
+        Component: withAuth(Booking),
+        path: "booking/:id",
       },
     ],
   },
@@ -68,16 +80,5 @@ export const router = createBrowserRouter([
     Component: Unauthorized,
     path: "/unauthorized",
   },
-  {
-    Component: Tours,
-    path: "tours",
-  },
-  {
-    Component: TourDetails,
-    path: "tours/:id",
-  },
-  {
-    Component: withAuth(Booking),
-    path: "booking/:id",
-  },
+
 ]);
