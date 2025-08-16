@@ -12,6 +12,8 @@ import Unauthorized from "@/pages/Unauthorized";
 import type { TRole } from "@/types";
 import { role } from "@/constants/role";
 import { withAuth } from "@/utils/withAuth";
+import Tours from "@/pages/Tours";
+import TourDetails from "@/pages/TourDetails";
 
 export const router = createBrowserRouter([
   {
@@ -60,4 +62,16 @@ export const router = createBrowserRouter([
     Component: Unauthorized,
     path: "/unauthorized",
   },
+  {
+    Component: Tours,
+    path: "tours",
+  },
+  {
+    Component: TourDetails,
+    path: "tours/:id",
+  },
+  // {
+  //   Component: withAuth(Booking),
+  //   path: "booking/:id",
+  // },
 ]);
