@@ -54,7 +54,10 @@ export default function AddTourType() {
 
 
   const totalPage = data?.meta?.totalPage || 1;
-  console.log(data);
+  // console.log(data);
+  // console.log(Array.from([1, 2, 3], (value, index) => value + 2));
+
+  // console.log(Array.from({ length: 5 }, (_, index) => index + 1));
 
   //* Total page 2 => [0, 0]
 
