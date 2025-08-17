@@ -32,9 +32,11 @@ export const tourApi = baseApi.injectEndpoints({
         }),
 
         getTourTypes: builder.query({
-            query: () => ({
+            // ekhane ( params ),, ta pagination er jonno deoa hoyse
+            query: (params) => ({
                 url: "/tour/tour-types",
                 method: "GET",
+                params
             }),
             // eta ( providesTags ) dile reload na diai data cole asbe
             providesTags: ["TOUR"],
