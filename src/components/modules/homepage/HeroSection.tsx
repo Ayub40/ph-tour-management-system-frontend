@@ -1,32 +1,35 @@
-// import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import Logo from "@/assets/icons/Logo";
-// import { Link } from "react-router";
-// import {
-//     Select,
-//     SelectContent,
-//     SelectGroup,
-//     SelectItem,
-//     SelectLabel,
-//     SelectTrigger,
-//     SelectValue,
-// } from "@/components/ui/select";
-// import { useGetDivisionsQuery } from "@/redux/features/division/division.api";
-// import { useState } from "react";
+import { Link } from "react-router";
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
+import { useGetDivisionsQuery } from "@/redux/features/division/division.api";
+import { useState } from "react";
+
 
 export default function HeroSection() {
-    // const [selectedDivision, setSelectedDivision] = useState<string | undefined>(
-    //     undefined
-    // );
+    const [selectedDivision, setSelectedDivision] = useState<string | undefined>(
+        undefined
+    );
 
-    // const { data: divisionData, isLoading: divisionIsLoading } =
-    //     useGetDivisionsQuery(undefined);
+    console.log(selectedDivision);
 
-    // const divisionOption = divisionData?.map(
-    //     (item: { _id: string; name: string }) => ({
-    //         label: item.name,
-    //         value: item._id,
-    //     })
-    // );
+    const { data: divisionData, isLoading: divisionIsLoading } =
+        useGetDivisionsQuery(undefined);
+
+    const divisionOption = divisionData?.map(
+        (item: { _id: string; name: string }) => ({
+            label: item.name,
+            value: item._id,
+        })
+    );
 
     return (
         <section className="relative overflow-hidden py-32 min-h-screen">
@@ -54,7 +57,7 @@ export default function HeroSection() {
                                 consequatur. Explicabo.
                             </p>
                         </div>
-                        {/* <div className="mt-6 flex justify-center gap-3">
+                        <div className="mt-6 flex justify-center gap-3">
                             <Select onValueChange={(value) => setSelectedDivision(value)}>
                                 <SelectTrigger className="w-[300px]">
                                     <SelectValue />
@@ -80,7 +83,7 @@ export default function HeroSection() {
                             ) : (
                                 <Button disabled>Search</Button>
                             )}
-                        </div> */}
+                        </div>
                     </div>
                 </div>
             </div>

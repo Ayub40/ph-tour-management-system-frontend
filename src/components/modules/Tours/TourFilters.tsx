@@ -16,6 +16,8 @@ import { useSearchParams } from "react-router";
 export default function TourFilters() {
     const [searchParams, setSearchParams] = useSearchParams();
 
+    // console.log(searchParams.get("division"));
+
     const selectedDivision = searchParams.get("division") || undefined;
     const selectedTourType = searchParams.get("tourType") || undefined;
 
@@ -43,6 +45,7 @@ export default function TourFilters() {
         const params = new URLSearchParams(searchParams);
         params.set("division", value);
         setSearchParams(params);
+        // console.log(params);
     };
 
     const handleTourTypeChange = (value: string) => {

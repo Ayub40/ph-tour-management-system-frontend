@@ -1,10 +1,8 @@
 import TourFilters from "@/components/modules/Tours/TourFilters";
 import { Button } from "@/components/ui/button";
-import { useGetAllToursQuery } from "@/redux/features/Tour/tour.api";
-// import { Link, useSearchParams } from "react-router";
+import { useGetAllToursQuery } from "@/redux/features/Tour/tour.api";;
 import { Link, useSearchParams } from "react-router";
 
-// import TourFilters from "@/components/modules/Tours/TourFilters";
 
 export default function Tours() {
     const [searchParams] = useSearchParams();
@@ -29,7 +27,8 @@ export default function Tours() {
                             <img
                                 src={item.images[0]}
                                 alt={item.title}
-                                className="object-cover w-full h-full "
+                                // className="object-cover w-full h-full "
+                                className="object-cover w-full h-96"
                             />
                         </div>
                         <div className="p-6 flex-1">
