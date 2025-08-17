@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import { useGetDivisionsQuery } from "@/redux/features/division/division.api";
-import { useGetAllToursQuery } from "@/redux/features/Tour/tour.api";
+import { useGetAllToursQuery, useGetTourTypesQuery } from "@/redux/features/Tour/tour.api";
 import { format } from "date-fns";
 import { Link, useParams } from "react-router";
 
@@ -19,13 +20,28 @@ export default function TourDetails() {
     }
   );
 
-  console.log(divisionData);
+  // console.log("Tour Data", data);
+  // console.log("Division Data", divisionData);
+
+  const { data: tourTypeData } = useGetTourTypesQuery(
+    {
+      _id: data?.[0]?.tourType,
+      fields: "name",
+    },
+    {
+      // skip: !data?.[0]?.tourType,
+      skip: !data,
+    }
+  );
+  // console.log("Tour Type Data", tourTypeData);
 
   const tourData = data?.[0];
 
   if (isLoading) {
     return <p>Loading...</p>;
   }
+
+  // console.log(tourTypeName);
 
   return (
     <div className="container mx-auto p-6">
@@ -87,7 +103,8 @@ export default function TourDetails() {
               <strong>Division:</strong> {divisionData?.[0]?.name}
             </p>
             <p>
-              <strong>Tour Type:</strong> {tourData?.tourType}
+              {/* <strong>Tour Type:</strong> {tourData?.tourType} */}
+              <strong>Tour Type:</strong> {tourTypeData?.data?.[0]?.name}
             </p>
             <p>
               <strong>Min Age:</strong> {tourData?.minAge} years

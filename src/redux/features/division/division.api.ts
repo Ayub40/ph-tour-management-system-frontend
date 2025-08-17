@@ -20,9 +20,11 @@ export const divisionApi = baseApi.injectEndpoints({
         }),
 
         getDivisions: builder.query({
-            query: () => ({
+            // ekhane params ta division name ta _id theke name e convert korar kaje lagtese
+            query: (params) => ({
                 url: "/division",
                 method: "GET",
+                params
             }),
             providesTags: ["DIVISION"],
             transformResponse: (response) => response.data,
