@@ -19,7 +19,7 @@ export default function HeroSection() {
         undefined
     );
 
-    console.log(selectedDivision);
+    // console.log(selectedDivision);
 
     const { data: divisionData, isLoading: divisionIsLoading } =
         useGetDivisionsQuery(undefined);
