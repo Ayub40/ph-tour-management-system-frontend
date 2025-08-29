@@ -52,7 +52,7 @@ export default function AddTourType() {
     }
   };
 
-
+  // For Pagination
   const totalPage = data?.meta?.totalPage || 1;
   // console.log(data);
   // console.log(Array.from([1, 2, 3], (value, index) => value + 2));
